@@ -14,6 +14,10 @@ if (isset($_POST['nome'])) {
     $sql->execute(array($_POST['nome'], $_POST['telefone'], $_POST['email']));
     echo 'inserido com sucesso!';
 }
+
+//comando para atualizar 
+$nome = 'Felipe';
+$pdo->exec("update clientes set nome='$nome' where id=$id=10");
 ?>
 
 <form method="post">
@@ -23,7 +27,7 @@ if (isset($_POST['nome'])) {
     <input type="submit" name="Enviar">
 </form>
 
-//Mostrar na tela
+<!-- Mostrar na tela -->
 
 <?php
     $sql = $pdo->prepare("SELECT * FROM clientes");
