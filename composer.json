@@ -1,0 +1,15 @@
+{
+    "name": "diego/crud-php",
+    "autoload": {
+        "psr-4": {
+            "Diego\\CrudPhp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "diegosilvaas",
+            "email": "diegomecanica2014@gmail.com"
+        }
+    ],
+    "require": {}
+}
