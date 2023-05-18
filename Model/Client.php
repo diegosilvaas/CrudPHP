@@ -93,4 +93,13 @@ public function __construct()
         $result = $stmt->fetch(PDO::FETCH_OBJ);
         return $result;
     }
+
+    public function deletarCliente($id)
+    {
+        $sql = 'select * from clientes where id = ?';
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(1, $id);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_OBJ);
+        return $result;
 }
