@@ -1,23 +1,10 @@
 <?php
 
-$pdo = new PDO('mysql:host=localhost;dbname=crud', 'root', '');
+require_once __DIR__ . '/vendor/autoload.php';
 
-//insert  
-if(isset($_GET['delete'])){
-    $id = (int)$_GET['delete'];
-    $pdo->exec("DELETE FROM clientes WHERE id=$id");
-    echo 'deletado com sucesso o id: '.$id;
+use Diego\CrudPhp\Controller\ClientController;
 
-}
-if (isset($_POST['nome'])) {
-    $sql = $pdo->prepare("INSERT INTO clientes VALUES (null,?,?)");
-    $sql->execute(array($_POST['nome'], $_POST['telefone'], $_POST['email']));
-    echo 'inserido com sucesso!';
-}
-
-//comando para atualizar 
-$nome = 'Felipe';
-$pdo->exec("update clientes set nome='$nome' where id=$id=10");
+$clienteController = new ClientController;
 ?>
 
 <form method="post">
@@ -27,18 +14,22 @@ $pdo->exec("update clientes set nome='$nome' where id=$id=10");
     <input type="submit" name="Enviar">
 </form>
 
-<!-- Mostrar na tela -->
-
 <?php
-    $sql = $pdo->prepare("SELECT * FROM clientes");
-    $sql->execute();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $clienteController->armazenar();
+}
 
-    $fetchClientes = $sql->fetchAll();
+$fetchClientes = $clienteController->listarClientes();
 
-    foreach ($fetchClientes as $key => $value) {
-        echo '<a href="?delete='.$value['id'].'">.(x)<a/>'.$value['nome']. ' | '.$value['telefone']. ' | '.$value['email'];
-        echo '<hr>';
-    }
+foreach ($fetchClientes as $key => $value) {
+    echo '<a href="views/editar.php?clientId=' . $value['id'] . '">(editar)<a/>' . '<a href="?delete=' . $value['id'] . '">.(x)<a/>' . $value['nome'] . ' | ' . $value['telefone'] . ' | ' . $value['email'];
+    echo '<hr>';
+}
 
+if (isset($_GET['delete'])) {
+    $clientId = $_GET['delete'];
+    $clienteController->deletarCliente($clientId);
+    header('Location: index.php');
+}
 
 ?>
