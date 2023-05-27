@@ -1,5 +1,5 @@
-# <h1 align="center"> Projeto CRUD em PHP Orientado a Objetos com MySQL </h1>  
-
+# <h1 align="center"> CRUD  </h1>  
+#### Projeto em PHP Orientado a Objetos com MySQL
 ### Este projeto é um exemplo de um CRUD (Create, Read, Update, Delete) desenvolvido em PHP orientado a objetos, utilizando um banco de dados MySQL para armazenar e manipular os dados.
 
 #
